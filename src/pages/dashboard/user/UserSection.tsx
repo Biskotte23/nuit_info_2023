@@ -4,19 +4,43 @@ import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import ProgressBar from './ProgressBar';
 import Trophy from './Trophy';
 import Container from './Container';
+import { useState } from 'react';
 
-export default function UserSection() {
+interface UserSectionProps {
+  currentProfilePictureIndex: number;
+  onProfilePictureChange: (index: number) => void;
+}
+
+export default function UserSection({
+  currentProfilePictureIndex,
+  onProfilePictureChange
+}: UserSectionProps) {
+  const [profilePictureIndex, setProfilePictureIndex] = useState<number>(
+    currentProfilePictureIndex
+  );
+  const profilePicturesNumber = 9;
+
+  function getProfilePicturePath() {
+    return `/assets/images/profiles/profile-${profilePictureIndex}.jpg`;
+  }
+
+  function changeProfilePicture() {
+    setProfilePictureIndex((profilePictureIndex + 1) % profilePicturesNumber);
+
+    onProfilePictureChange(profilePictureIndex);
+  }
+
   return (
     <div className="user-section">
       <div className="profile-picture">
         <div className="profile-picture-container">
           <img
             className="profile-picture-container__image"
-            src="https://passion-stickers.com/4409-large_default/stickers-mario-tete.jpg"
+            src={getProfilePicturePath()}
             alt="Image de profil du joueur"
           />
         </div>
-        <button className="profile-picture__edit-button">
+        <button className="profile-picture__edit-button" onClick={changeProfilePicture}>
           Changer l'image <FontAwesomeIcon icon={faCamera} />
         </button>
       </div>
