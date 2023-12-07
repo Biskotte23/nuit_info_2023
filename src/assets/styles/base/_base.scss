@@ -1,0 +1,42 @@
+/**
+ * Set up a decent box model for every element. 
+ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * Set up the default font and its reference size.
+ */
+html {
+  font-size: 10px;
+  font-family: var(--font-family);
+}
+
+/**
+ * Set up the default background.
+ */
+body {
+  color: var(--color-text);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  vertical-align: bottom;
+}
+
+button {
+  border: none;
+  color: var(--color-text);
+  background-color: var(--color-white);
+}

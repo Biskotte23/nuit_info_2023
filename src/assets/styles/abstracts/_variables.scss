@@ -1,0 +1,26 @@
+// Max width of the content of the page.
+$max-width: 100rem;
+$header-height: 10rem;
+$header-height-sm: 8rem;
+$header-height-xs: 6rem;
+
+/// Breakpoints map.
+/// @prop {String} keys - Keys are identifiers mapped to a given length.
+/// @prop {Map} values - Values are actual breakpoints expressed in pixels.
+$breakpoints: (
+  'xs-max': 576px,
+  'sm-min': 577px,
+  'sm-max': 768px,
+  'md-min': 769px,
+  'md-max': 992px,
+  'lg-min': 993px,
+  'lg-max': 1200px,
+  'xl-min': 1201px
+);
+
+// z-index value of some components.
+$zIndexes: (
+  'body': 0,
+  'filter-bar': 5,
+  'header': 10
+);
