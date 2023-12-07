@@ -1,0 +1,14 @@
+.trophy {
+  --size: 5rem;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+
+  &__image {
+    &--won {
+      filter: grayscale(1);
+    }
+  }
+}

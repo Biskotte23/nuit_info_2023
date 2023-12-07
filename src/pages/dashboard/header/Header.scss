@@ -1,0 +1,50 @@
+@import '../../../assets/styles/imports/abstract-imports';
+
+/** 
+ * Header.
+ */
+.header {
+  width: 100%;
+  height: $header-height;
+  padding: 0 6rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-white);
+  box-shadow: var(--box-shadow);
+
+  @include lg-lt {
+    padding: 0 3rem;
+  }
+
+  @include sm-lt {
+    height: $header-height-sm;
+    padding: 2rem;
+  }
+
+  @include xs {
+    height: $header-height-xs;
+    padding: 0 1rem;
+  }
+
+  @include mobile-landscape {
+    --header-height: auto;
+    padding: 0.8rem 2rem;
+  }
+
+  &__content {
+    width: 100%;
+    max-width: $max-width;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      font-weight: 300;
+      font-size: 2.6rem;
+    }
+  }
+}

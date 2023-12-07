@@ -1,0 +1,30 @@
+.progression {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin-bottom: 0.5rem;
+
+  &__label {
+    width: 8rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  &-bar {
+    width: 10rem;
+    height: 1rem;
+    border-radius: 1rem;
+    border: 1px solid black;
+    overflow: hidden;
+    margin: 0 1rem;
+
+    &__completed {
+      height: 100%;
+    }
+  }
+
+  &__score {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+}
