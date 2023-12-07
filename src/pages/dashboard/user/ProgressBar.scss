@@ -2,7 +2,7 @@
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
 
   &__label {
     width: 8rem;
@@ -12,9 +12,9 @@
 
   &-bar {
     width: 10rem;
-    height: 1rem;
+    height: 1.2rem;
     border-radius: 1rem;
-    border: 1px solid black;
+    border: 2px solid transparent;
     overflow: hidden;
     margin: 0 1rem;
 

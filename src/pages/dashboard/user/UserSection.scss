@@ -1,7 +1,8 @@
 .user-section {
   width: 36rem;
   padding: 2rem;
-  background-color: #ddd;
+  color: var(--color-snow);
+  background-color: var(--color-grey);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -22,7 +23,7 @@
       align-items: center;
       border-radius: 50%;
       overflow: hidden;
-      background-color: cyan;
+      background-color: var(--color-white);
       margin-bottom: 0.5rem;
       box-shadow: var(--box-shadow);
 
@@ -36,6 +37,7 @@
 
     &__edit-button {
       padding: 0.5rem 1rem;
+      color: inherit;
       background-color: transparent;
       font-size: 1.4rem;
       font-weight: 600;
@@ -43,7 +45,7 @@
       transition: 0.2s;
 
       &:hover {
-        color: red;
+        color: var(--color-primary);
         transition: 0.2s;
       }
     }
@@ -59,7 +61,7 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
     }
   }
 }

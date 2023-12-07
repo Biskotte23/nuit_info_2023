@@ -10,7 +10,7 @@ export default function ProgressBar({ label, progression, color }: ProgressBarPr
   return (
     <div className="progression">
       <p className="progression__label">{`${label} :`}</p>
-      <div className="progression-bar">
+      <div className="progression-bar" style={{ borderColor: color }}>
         <div
           className="progression-bar__completed"
           style={{ width: `${progression}%`, backgroundColor: color }}
