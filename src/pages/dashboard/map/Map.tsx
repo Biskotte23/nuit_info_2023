@@ -1,9 +1,10 @@
 import './Map.scss';
+import Theme from '../../themes/Theme';
 
 export default function Map() {
   return (
     <div className="map">
-      <h2>{'< Carte >'}</h2>
+      <Theme />
     </div>
   );
 }

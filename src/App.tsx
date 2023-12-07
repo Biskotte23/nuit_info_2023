@@ -2,7 +2,11 @@ import Dashboard from './pages/dashboard/Dashboard';
 import './App.scss';
 
 function App() {
-  return <Dashboard />;
+  return (
+    <>
+      <Dashboard />
+    </>
+  );
 }
 
 export default App;
