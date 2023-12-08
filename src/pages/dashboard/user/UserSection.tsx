@@ -5,6 +5,7 @@ import ProgressBar from './ProgressBar';
 import Trophy from './Trophy';
 import Container from './Container';
 import { useState } from 'react';
+import { User } from '../../../models/user/User';
 
 interface EasterEggsProps {
   path: string;
@@ -12,15 +13,16 @@ interface EasterEggsProps {
 }
 
 interface UserSectionProps {
-  currentProfilePictureIndex: number;
+  user: User;
   onProfilePictureChange: (index: number) => void;
 }
 
 function EasterEggs({ easterEggs }: { easterEggs: EasterEggsProps[][] }) {
-  return easterEggs.map((row) => (
-    <div className="trophy-container__row">
+  return easterEggs.map((row, index) => (
+    <div key={index} className="trophy-container__row">
       {row.map((easterEgg) => (
         <Trophy
+          key={easterEgg.path}
           image={`/assets/images/easter_eggs/icons/${easterEgg.path}`}
           label="Random"
           isGetted={easterEgg.enable}
@@ -30,35 +32,51 @@ function EasterEggs({ easterEggs }: { easterEggs: EasterEggsProps[][] }) {
   ));
 }
 
-export default function UserSection({
-  currentProfilePictureIndex,
-  onProfilePictureChange
-}: UserSectionProps) {
+export default function UserSection({ user, onProfilePictureChange }: UserSectionProps) {
   const [profilePictureIndex, setProfilePictureIndex] = useState<number>(
-    currentProfilePictureIndex
+    user.profilePictureIndex ?? 0
   );
   const profilePicturesNumber = 9;
   const easterEggs: EasterEggsProps[][] = [
     [
-      { path: 'lion.jpg', enable: false },
-      { path: 'santa.jpg', enable: false },
-      { path: 'earth.jpg', enable: true }
+      { path: 'lion.jpg', enable: !!user.trophies.lion },
+      { path: 'santa.jpg', enable: !!user.trophies.santa },
+      { path: 'earth.jpg', enable: !!user.trophies.earth }
     ],
     [
-      { path: 'trooper.png', enable: true },
-      { path: 'palm.jpg', enable: false },
-      { path: 'charlie.png', enable: false }
+      { path: 'trooper.png', enable: !!user.trophies.trooper },
+      { path: 'palm.jpg', enable: !!user.trophies.palm },
+      { path: 'charlie.png', enable: !!user.trophies.charlie }
     ]
   ];
+
+  const trophyProgression =
+    ((Number(user.trophies.lion) +
+      Number(user.trophies.santa) +
+      Number(user.trophies.earth) +
+      Number(user.trophies.trooper) +
+      Number(user.trophies.palm) +
+      Number(user.trophies.charlie)) *
+      100) /
+    6;
+
+  const quizzProgression =
+    ((Number(user.quizzes.energy) +
+      Number(user.quizzes.forest) +
+      Number(user.quizzes.pollution) +
+      Number(user.quizzes.sea) +
+      Number(user.quizzes.wind)) *
+      100) /
+    5;
 
   function getProfilePicturePath() {
     return `/assets/images/profiles/profile-${profilePictureIndex}.jpg`;
   }
 
   function changeProfilePicture() {
-    setProfilePictureIndex((profilePictureIndex + 1) % profilePicturesNumber);
-
-    onProfilePictureChange(profilePictureIndex);
+    const index = (profilePictureIndex + 1) % profilePicturesNumber;
+    setProfilePictureIndex(index);
+    onProfilePictureChange(index);
   }
 
   return (
@@ -77,8 +95,12 @@ export default function UserSection({
       </div>
       <Container label="Progression">
         <div className="progression-container user-section__container">
-          <ProgressBar label="Défis" progression={60} color="#00d0ff" />
-          <ProgressBar label="Trophées" progression={15} color="#2edd22" />
+          <ProgressBar label="Défis" progression={Math.floor(quizzProgression)} color="#00d0ff" />
+          <ProgressBar
+            label="Trophées"
+            progression={Math.floor(trophyProgression)}
+            color="#2edd22"
+          />
         </div>
       </Container>
       <Container label="Trophées cachés">

@@ -5,27 +5,28 @@ import Header from './header/Header';
 import Menu from './menu/Menu';
 import UserProfile from './user/UserSection';
 import { Theme } from '../../models/themes/Theme';
+import { storageService } from '../../services/StorageService';
 
 export default function Dashboard() {
   const [theme, setTheme] = useState<Theme | null>(null);
 
   function updateProfilePictureIndex(index: number) {
-    console.log('New profile picture index', index);
+    user.profilePictureIndex = index;
+    storageService.saveData(user);
   }
 
   function handleMenuItemClick(t: Theme) {
     setTheme(t);
   }
 
+  const user = storageService.getData();
+
   return (
     <div className="dashboard">
       <Header />
       <div className="dashboard__content">
         <Menu onItemClick={handleMenuItemClick} />
-        <UserProfile
-          currentProfilePictureIndex={0}
-          onProfilePictureChange={updateProfilePictureIndex}
-        />
+        <UserProfile user={user} onProfilePictureChange={updateProfilePictureIndex} />
       </div>
       {theme && <Quizz theme={theme} onClose={() => setTheme(null)} />}
     </div>

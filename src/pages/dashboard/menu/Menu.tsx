@@ -40,7 +40,7 @@ export default function Menu({ onItemClick }: MenuProps) {
   return (
     <div className="menu">
       {themes.map((theme) => (
-        <MenuItem theme={theme} onClick={onItemClick} />
+        <MenuItem key={theme.id} theme={theme} onClick={onItemClick} />
       ))}
     </div>
   );
