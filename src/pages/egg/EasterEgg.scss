@@ -1,0 +1,14 @@
+.easter-egg {
+  &__title {
+    font-size: 3rem;
+    font-weight: 100;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    color: var(--color-primary);
+  }
+
+  &__image {
+    object-fit: contain;
+    max-height: 30rem;
+  }
+}
