@@ -10,11 +10,13 @@ import { Trophy } from '../../models/trophies/Trophy';
 import { TrophyEnum } from '../../models/trophies/TrophyEnum';
 import EasterEgg from '../egg/EasterEgg';
 import { User } from '../../models/user/User';
+import { Modal } from 'antd';
 
 export default function Dashboard() {
   const [theme, setTheme] = useState<Theme | null>(null);
   const [trophy, setTrophy] = useState<Trophy | null>(null);
   const [user, setUser] = useState<User>(storageService.getData());
+  const [modal, contextHolder] = Modal.useModal();
 
   function updateProfilePictureIndex(index: number) {
     const updatedUser = {
@@ -42,6 +44,29 @@ export default function Dashboard() {
     setTrophy(null);
   }
 
+  function handleConfirmClick(won: boolean) {
+    if (won) {
+      const updatedUser = {
+        ...user,
+        quizzes: {
+          ...user.quizzes,
+          [theme!.id]: true
+        }
+      };
+      setUser(updatedUser);
+      storageService.saveData(updatedUser);
+      setTheme(null);
+      modal.success({
+        title: 'Félicitations',
+        content: 'Vous avez répondu juste à toutes les questions !',
+        centered: true
+      });
+    } else {
+      setTheme(null);
+      modal.error({ title: 'Raté...', content: 'Essaie encore !', centered: true });
+    }
+  }
+
   return (
     <div className="dashboard">
       <Header />
@@ -49,8 +74,11 @@ export default function Dashboard() {
         <Menu onItemClick={handleMenuItemClick} />
         <UserProfile user={user} onProfilePictureChange={updateProfilePictureIndex} />
       </div>
-      {theme && <Quizz theme={theme} onClose={() => setTheme(null)} />}
+      {theme && (
+        <Quizz theme={theme} onClose={() => setTheme(null)} onConfirm={handleConfirmClick} />
+      )}
       {trophy && <EasterEgg trophy={trophy} onClose={handleEasterEggClose} />}
+      {contextHolder}
     </div>
   );
 }

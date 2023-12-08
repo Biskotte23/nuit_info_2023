@@ -1,0 +1,164 @@
+{
+  "questions": {
+    "sea": [
+      {
+        "question": "Quelle est la plus grande menace pour les récifs coralliens ?",
+        "options": [
+          { "id": 1, "value": "Pêche durable" },
+          { "id": 2, "value": "Pollution plastique" },
+          { "id": 3, "value": "Changement climatique" }
+        ],
+        "response": 2
+      },
+      {
+        "question": "Quel est l'effet du réchauffement climatique sur les océans ?",
+        "options": [
+          { "id": 1, "value": "Diminution du niveau de la mer" },
+          { "id": 2, "value": "Augmentation de la salinité" },
+          { "id": 3, "value": "Acidification des océans" }
+        ],
+        "response": 3
+      },
+      {
+        "question": "Comment peut-on contribuer à la préservation des océans ?",
+        "options": [
+          {
+            "id": 1,
+            "value": "Participer à des actions de nettoyage des plages"
+          },
+          { "id": 2, "value": "Acheter des produits en plastique" },
+          { "id": 3, "value": "Utiliser des sacs en plastique" }
+        ],
+        "response": 1
+      }
+    ],
+    "forest": [
+      {
+        "question": "Quel est le rôle des arbres dans l'écosystème ?",
+        "options": [
+          { "id": 1, "value": "Fournir de l'oxygène" },
+          { "id": 2, "value": "Absorber le dioxyde de carbone" },
+          { "id": 3, "value": "Produire l'éléctricité" }
+        ],
+        "response": 2
+      },
+      {
+        "question": "Pourquoi la biodiversité est-elle importante ?",
+        "options": [
+          { "id": 1, "value": "Pour maintenir l'équilibre écologique" },
+          { "id": 2, "value": "Pour des raisions esthétiques" },
+          { "id": 3, "value": "Pour la production de plastiques" }
+        ],
+        "response": 1
+      },
+      {
+        "question": "Comment peut-on encourager la biodiversité dans son jardin ?",
+        "options": [
+          { "id": 1, "value": "Utiliser intensivement des pesticides" },
+          { "id": 2, "value": "Cultiver une variété de plantes indigènes" },
+          { "id": 3, "value": "Planter une seule espèce de plante" }
+        ],
+        "response": 2
+      }
+    ],
+    "energy": [
+      {
+        "question": "Quelle source d'énergie est considérée comme renouvelable ?",
+        "options": [
+          { "id": 1, "value": "Pétrole" },
+          { "id": 2, "value": "Solaire" },
+          { "id": 3, "value": "Gaz naturel" }
+        ],
+        "response": 2
+      },
+      {
+        "question": "Comment peut-on réduire la consommation d'énergie à la maison ?",
+        "options": [
+          { "id": 1, "value": "Utiliser des appareils électriques" },
+          { "id": 2, "value": "Utiliser des ampoules à incandescence" },
+          { "id": 3, "value": "Éteindre les appareils lorsque non utilisés" }
+        ],
+        "response": 3
+      },
+      {
+        "question": "Quel est l'avantage des véhicules électriques par rapport aux véhicules à essence ?",
+        "options": [
+          {
+            "id": 1,
+            "value": "Ils émettent moins de polluants atmosphériques"
+          },
+          { "id": 2, "value": "Ils émettent plus de polluants atmosphériques" },
+          {
+            "id": 3,
+            "value": "Ils émettent autant de polluants atmosphériques"
+          }
+        ],
+        "response": 1
+      }
+    ],
+    "wind": [
+      {
+        "question": "Pourquoi la conservation de la faune sauvage est-elle importante ?",
+        "options": [
+          { "id": 1, "value": "Pour maintenir l'équilibre des écosystèmes" },
+          { "id": 2, "value": "Pour des raisons esthétiques" },
+          { "id": 3, "value": "Pour la production de plastiques" }
+        ],
+        "response": 1
+      },
+      {
+        "question": "Quelle action contribue à la protection des habitats naturels ?",
+        "options": [
+          { "id": 1, "value": "Établissement de réserves naturelles" },
+          { "id": 2, "value": "Défrichement des forêts" },
+          { "id": 3, "value": "Utilisation de pesticides" }
+        ],
+        "response": 1
+      },
+      {
+        "question": "Comment pouvez-vous aider à prévenir le commerce illégal d'espèces sauvages ?",
+        "options": [
+          { "id": 1, "value": "Acheter des produits en ivoire" },
+          {
+            "id": 2,
+            "value": "Informer les autorités en cas de suspicion de trafic"
+          },
+          { "id": 3, "value": "Acheter des produits en bois exotique" }
+        ],
+        "response": 2
+      }
+    ],
+    "pollution": [
+      {
+        "question": "Quelle est la meilleure façon de réduire les déchets plastiques ?",
+        "options": [
+          { "id": 1, "value": "Jeter les plastiques dans la nature" },
+          { "id": 2, "value": "Utiliser des produits à usage unique" },
+          { "id": 3, "value": "Utiliser des sacs réutilisables" }
+        ],
+        "response": 3
+      },
+      {
+        "question": "Comment pouvez-vous réduire les déchets alimentaires à la maison ?",
+        "options": [
+          { "id": 1, "value": "Jeter les restes de nourriture à la poubelle" },
+          { "id": 2, "value": "Composter les déchets alimentaires" },
+          { "id": 3, "value": "Acheter des aliments en grande quantité" }
+        ],
+        "response": 2
+      },
+      {
+        "question": "Quelle est l'importance du recyclage ?",
+        "options": [
+          { "id": 1, "value": "Augmenter la quantité de déchets" },
+          {
+            "id": 2,
+            "value": "Réduire la demande de nouvelles matières premières"
+          },
+          { "id": 3, "value": "Ignorer les problèmes environnementaux" }
+        ],
+        "response": 2
+      }
+    ]
+  }
+}

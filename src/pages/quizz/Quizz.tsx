@@ -1,46 +1,67 @@
-import { Modal } from 'antd';
 import { Theme } from '../../models/themes/Theme';
-import quizs from '../../assets/theQuiz/quiz.json';
-import { ThemeEnum } from '../../models/themes/ThemeEnum';
-import ThemeQuiz from './quizzies/ThemeQuiz';
+import { quizz } from '../../models/quizz/Quizz';
+import './Quizz.scss';
+import Question from './Question';
+import { Modal } from 'antd';
+import { useState } from 'react';
 
 interface QuizzProps {
   theme: Theme;
   onClose: () => void;
+  onConfirm: (isWin: boolean) => void;
 }
 
+export default function Quizz({ theme, onClose, onConfirm }: QuizzProps) {
+  const questions = quizz.questions[theme.id];
+  const [results, setResults] = useState<number[]>(
+    Array.from({ length: questions.length }, () => 1)
+  );
 
-let quizzies: object = quizs;
+  function isWin() {
+    let won = true;
 
-export default function Quizz({ theme, onClose }: QuizzProps) {
-  let quizz;
+    try {
+      questions.forEach((q, index) => {
+        if (results[index] !== q.response) {
+          throw 'Wrong answer';
+        }
+      });
+    } catch (e) {
+      won = false;
+    }
 
-  switch (theme.id) {
-    case ThemeEnum.Sea:
-      quizz = <ThemeQuiz questions={quizzies.themes[0]} />;
-      break;
+    return won;
+  }
 
-    case ThemeEnum.Forest:
-      quizz = <ThemeQuiz questions={quizzies.themes[1]} />;
-      break;
+  function editResults(index: number, response: number) {
+    const updatedResults: number[] = [];
 
-    case ThemeEnum.Energy:
-      quizz = <ThemeQuiz questions={quizzies.themes[2]} />;
-      break;
+    results.forEach((r, i) => {
+      updatedResults.push(i === index ? response : r);
+    });
 
-    case ThemeEnum.Wind:
-      quizz = <ThemeQuiz questions={quizzies.themes[3]} />;
-      break;
+    setResults(updatedResults);
+  }
 
-    case ThemeEnum.Pollution:
-      quizz = <ThemeQuiz questions={quizzies.themes[4]} />;
-      break;
+  function handleOnConfirm() {
+    onConfirm(isWin());
   }
 
   return (
-    <Modal open={true} centered={true} onCancel={onClose} cancelText="Fermer">
-      <h1>Quizz sur "{theme.label}"</h1>
-      {quizz ? quizz : undefined}
-    </Modal>
+    <div className="quizz">
+      <Modal
+        open={true}
+        centered={true}
+        onCancel={onClose}
+        cancelText="Fermer"
+        okText="Valider"
+        onOk={handleOnConfirm}
+        title={`Quizz "${theme.label}"`}
+      >
+        {questions.map((q, index) => (
+          <Question key={q.question} question={q} onClick={(id) => editResults(index, id)} />
+        ))}
+      </Modal>
+    </div>
   );
 }

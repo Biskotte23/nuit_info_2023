@@ -1,0 +1,14 @@
+.question {
+  margin-bottom: 1rem;
+
+  &__label {
+    font-size: 1.6rem;
+    font-size: 500;
+  }
+
+  .options {
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+}
