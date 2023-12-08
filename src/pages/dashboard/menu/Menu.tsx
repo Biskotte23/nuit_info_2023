@@ -1,31 +1,37 @@
+import { Theme } from '../../../models/themes/Theme';
+import { ThemeEnum } from '../../../models/themes/ThemeEnum';
 import './Menu.scss';
 import MenuItem from './MenuItem';
 
-interface Theme {
-  label: string;
-  image: string;
+interface MenuProps {
+  onItemClick: (theme: Theme) => void;
 }
 
-export default function Menu() {
+export default function Menu({ onItemClick }: MenuProps) {
   const themes: Theme[] = [
     {
+      id: ThemeEnum.Energy,
       label: 'Energies',
       image: 'energies.jpg'
     },
     {
+      id: ThemeEnum.Wind,
       label: 'Vents',
       image: 'windmill.png'
     },
 
     {
+      id: ThemeEnum.Forest,
       label: 'Forêts',
       image: 'forest.jpg'
     },
     {
+      id: ThemeEnum.Sea,
       label: 'Milieu marin',
       image: 'sea.jpg'
     },
     {
+      id: ThemeEnum.Pollution,
       label: 'Pollution',
       image: 'pollution.jpg'
     }
@@ -34,7 +40,7 @@ export default function Menu() {
   return (
     <div className="menu">
       {themes.map((theme) => (
-        <MenuItem label={theme.label} image={theme.image} />
+        <MenuItem theme={theme} onClick={onItemClick} />
       ))}
     </div>
   );
