@@ -1,6 +1,6 @@
 import './Dashboard.scss';
 import Header from './header/Header';
-import Map from './map/Map';
+import Menu from './menu/Menu';
 import UserProfile from './user/UserSection';
 
 export default function Dashboard() {
@@ -12,7 +12,7 @@ export default function Dashboard() {
     <div className="dashboard">
       <Header />
       <div className="dashboard__content">
-        <Map />
+        <Menu />
         <UserProfile
           currentProfilePictureIndex={0}
           onProfilePictureChange={updateProfilePictureIndex}

@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: #fff;
+  background-color: var(--color-white);
 
   &__content {
     width: 100%;
@@ -15,7 +15,6 @@
     height: 100%;
     display: flex;
     flex-flow: row nowrap;
-    background-color: blue;
 
     @include sm-lt {
       margin-top: $header-height-sm;
