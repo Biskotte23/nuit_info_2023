@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Quizz from '../quizz/Quizz';
 import './Dashboard.scss';
 import Header from './header/Header';
@@ -19,6 +19,26 @@ export default function Dashboard() {
   const [user, setUser] = useState<User>(storageService.getData());
   const [modal, contextHolder] = Modal.useModal();
   const [displayLanding, setDisplayLanding] = useState<boolean>(false);
+  const dashboardRef = useRef<HTMLDivElement>(null);
+  const [chars, setChars] = useState<string>('');
+
+  useEffect(() => {
+    if (dashboardRef.current) {
+      dashboardRef.current.focus();
+    }
+  }, []);
+
+  function onKeyDown(key: string) {
+    const goal = 'GREENQUEST';
+    const newChars = chars + key;
+    const formattedChars = newChars.trim().replace(' ', '').toUpperCase();
+    setChars(goal.includes(formattedChars) ? newChars : '');
+
+    console.log(key);
+    if (formattedChars === goal) {
+      displayEasterEgg(TrophyEnum.Santa);
+    }
+  }
 
   function updateProfilePictureIndex(index: number) {
     const updatedUser = {
@@ -44,6 +64,7 @@ export default function Dashboard() {
     setUser(updatedUser);
     storageService.saveData(updatedUser);
     setTrophy(null);
+    dashboardRef.current?.focus();
   }
 
   function handleConfirmClick(won: boolean) {
@@ -58,11 +79,29 @@ export default function Dashboard() {
       setUser(updatedUser);
       storageService.saveData(updatedUser);
       setTheme(null);
-      modal.success({
-        title: 'Félicitations',
-        content: 'Vous avez répondu juste à toutes les questions !',
-        centered: true
-      });
+      modal
+        .success({
+          title: 'Félicitations',
+          content: 'Vous avez répondu correctement à toutes les questions !',
+          centered: true
+        })
+        .then(
+          () => {
+            const quizzProgression =
+              ((Number(updatedUser.quizzes.energy) +
+                Number(updatedUser.quizzes.forest) +
+                Number(updatedUser.quizzes.pollution) +
+                Number(updatedUser.quizzes.sea) +
+                Number(updatedUser.quizzes.wind)) *
+                100) /
+              5;
+
+            if (quizzProgression === 100) {
+              displayEasterEgg(TrophyEnum.Trooper);
+            }
+          },
+          () => {}
+        );
     } else {
       setTheme(null);
       modal.error({ title: 'Raté...', content: 'Essaie encore !', centered: true });
@@ -78,23 +117,38 @@ export default function Dashboard() {
   }
 
   return !displayLanding ? (
-    <div className="dashboard">
-      <Header onDisplayLanding={handleDisplayLanding} />
-      <div className="dashboard__content">
-        <Menu onItemClick={handleMenuItemClick} />
-        <UserSection
-          user={user}
-          onProfilePictureChange={updateProfilePictureIndex}
-          onCharlieClick={() => displayEasterEgg(TrophyEnum.Charlie)}
+    dashboardRef.current?.focus() || (
+      <div
+        className="dashboard"
+        ref={dashboardRef}
+        tabIndex={0}
+        onKeyDown={(e) => onKeyDown(e.key)}
+      >
+        <Header
+          onDisplayLanding={handleDisplayLanding}
+          onLeafClick={() => displayEasterEgg(TrophyEnum.Palm)}
         />
+        <div className="dashboard__content">
+          <Menu onItemClick={handleMenuItemClick} />
+          <UserSection
+            user={user}
+            onProfilePictureChange={updateProfilePictureIndex}
+            onCharlieClick={() => displayEasterEgg(TrophyEnum.Charlie)}
+          />
+        </div>
+        {theme && (
+          <Quizz theme={theme} onClose={() => setTheme(null)} onConfirm={handleConfirmClick} />
+        )}
+        {trophy && <EasterEgg trophy={trophy} onClose={handleEasterEggClose} />}
+        {contextHolder}
       </div>
-      {theme && (
-        <Quizz theme={theme} onClose={() => setTheme(null)} onConfirm={handleConfirmClick} />
-      )}
-      {trophy && <EasterEgg trophy={trophy} onClose={handleEasterEggClose} />}
-      {contextHolder}
-    </div>
+    )
   ) : (
-    <LandingPage onClose={() => setDisplayLanding(false)} />
+    <LandingPage
+      onClose={() => {
+        setDisplayLanding(false);
+        displayEasterEgg(TrophyEnum.Earth);
+      }}
+    />
   );
 }
