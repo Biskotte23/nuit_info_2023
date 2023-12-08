@@ -3,8 +3,9 @@ import './Header.scss';
 export default function Header() {
   return (
     <header className="header">
-      <div className="header__content">
-        <h1>Nuit de l'Info 2023</h1>
+      <div className="header-content">
+        <h1 className="header-content__title">Green Quest</h1>
+        <i className="header-content__icon fa-solid fa-leaf"></i>
       </div>
     </header>
   );

@@ -3,10 +3,10 @@ import Quizz from '../quizz/Quizz';
 import './Dashboard.scss';
 import Header from './header/Header';
 import Menu from './menu/Menu';
-import UserProfile from './user/UserSection';
+import UserSection from './user/UserSection';
 import { Theme } from '../../models/themes/Theme';
 import { storageService } from '../../services/StorageService';
-import { Trophy } from '../../models/trophies/Trophy';
+import { Trophy, easterEggs } from '../../models/trophies/Trophy';
 import { TrophyEnum } from '../../models/trophies/TrophyEnum';
 import EasterEgg from '../egg/EasterEgg';
 import { User } from '../../models/user/User';
@@ -67,12 +67,20 @@ export default function Dashboard() {
     }
   }
 
+  function displayEasterEgg(trophy: TrophyEnum) {
+    setTrophy(easterEggs[trophy]);
+  }
+
   return (
     <div className="dashboard">
       <Header />
       <div className="dashboard__content">
         <Menu onItemClick={handleMenuItemClick} />
-        <UserProfile user={user} onProfilePictureChange={updateProfilePictureIndex} />
+        <UserSection
+          user={user}
+          onProfilePictureChange={updateProfilePictureIndex}
+          onCharlieClick={() => displayEasterEgg(TrophyEnum.Charlie)}
+        />
       </div>
       {theme && (
         <Quizz theme={theme} onClose={() => setTheme(null)} onConfirm={handleConfirmClick} />

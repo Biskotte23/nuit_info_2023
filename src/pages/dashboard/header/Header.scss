@@ -33,7 +33,7 @@
     padding: 0.8rem 2rem;
   }
 
-  &__content {
+  &-content {
     width: 100%;
     max-width: $max-width;
     height: 100%;
@@ -42,9 +42,16 @@
     justify-content: center;
     align-items: center;
 
-    h1 {
+    &__title {
       font-weight: 300;
       font-size: 2.6rem;
+    }
+
+    &__icon {
+      margin-left: 2rem;
+      margin-right: 1rem;
+      font-size: 3.2rem;
+      color: var(--color-secondary);
     }
   }
 }

@@ -12,11 +12,6 @@ interface EasterEggsProps {
   enable: boolean;
 }
 
-interface UserSectionProps {
-  user: User;
-  onProfilePictureChange: (index: number) => void;
-}
-
 function EasterEggs({ easterEggs }: { easterEggs: EasterEggsProps[][] }) {
   return easterEggs.map((row, index) => (
     <div key={index} className="trophy-container__row">
@@ -32,11 +27,21 @@ function EasterEggs({ easterEggs }: { easterEggs: EasterEggsProps[][] }) {
   ));
 }
 
-export default function UserSection({ user, onProfilePictureChange }: UserSectionProps) {
+interface UserSectionProps {
+  user: User;
+  onProfilePictureChange: (index: number) => void;
+  onCharlieClick: () => void;
+}
+
+export default function UserSection({
+  user,
+  onProfilePictureChange,
+  onCharlieClick
+}: UserSectionProps) {
   const [profilePictureIndex, setProfilePictureIndex] = useState<number>(
     user.profilePictureIndex ?? 0
   );
-  const profilePicturesNumber = 9;
+  const profilePicturesNumber = 19;
   const easterEggs: EasterEggsProps[][] = [
     [
       { path: 'lion.jpg', enable: !!user.trophies.lion },
@@ -69,6 +74,8 @@ export default function UserSection({ user, onProfilePictureChange }: UserSectio
       100) /
     5;
 
+  const isCharlie = profilePictureIndex === profilePicturesNumber - 1;
+
   function getProfilePicturePath() {
     return `/assets/images/profiles/profile-${profilePictureIndex}.jpg`;
   }
@@ -84,9 +91,12 @@ export default function UserSection({ user, onProfilePictureChange }: UserSectio
       <div className="profile-picture">
         <div className="profile-picture-container">
           <img
-            className="profile-picture-container__image"
+            className={`profile-picture-container__image ${
+              isCharlie ? 'profile-picture-container__image--charlie' : ''
+            }`}
             src={getProfilePicturePath()}
             alt="Image de profil du joueur"
+            onClick={isCharlie ? onCharlieClick : undefined}
           />
         </div>
         <button className="profile-picture__edit-button" onClick={changeProfilePicture}>
