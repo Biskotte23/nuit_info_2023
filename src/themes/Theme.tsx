@@ -5,7 +5,7 @@ import '../assets/styles/index.scss';
 /**
  * Theme properties.
  */
-interface ThemeProps {
+export interface ThemeProps {
   children: React.ReactNode;
 }
 
