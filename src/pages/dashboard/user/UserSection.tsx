@@ -12,17 +12,26 @@ interface EasterEggsProps {
   enable: boolean;
 }
 
-function EasterEggs({ easterEggs }: { easterEggs: EasterEggsProps[][] }) {
-  return easterEggs.map((row, index) => (
+function EasterEggs({
+  trophies,
+  onLionClick
+}: {
+  trophies: EasterEggsProps[][];
+  onLionClick: () => void;
+}) {
+  return trophies.map((row, index) => (
     <div key={index} className="trophy-container__row">
-      {row.map((easterEgg) => (
-        <Trophy
-          key={easterEgg.path}
-          image={`/assets/images/easter_eggs/icons/${easterEgg.path}`}
-          label="Random"
-          isGetted={easterEgg.enable}
-        />
-      ))}
+      {row.map((easterEgg) => {
+        return (
+          <Trophy
+            key={easterEgg.path}
+            onClick={easterEgg.path === 'lion.jpg' ? onLionClick : () => {}}
+            image={`/assets/images/easter_eggs/icons/${easterEgg.path}`}
+            label="Random"
+            isGetted={easterEgg.enable}
+          />
+        );
+      })}
     </div>
   ));
 }
@@ -31,12 +40,14 @@ interface UserSectionProps {
   user: User;
   onProfilePictureChange: (index: number) => void;
   onCharlieClick: () => void;
+  onLionClick: () => void;
 }
 
 export default function UserSection({
   user,
   onProfilePictureChange,
-  onCharlieClick
+  onCharlieClick,
+  onLionClick
 }: UserSectionProps) {
   const [profilePictureIndex, setProfilePictureIndex] = useState<number>(
     user.profilePictureIndex ?? 0
@@ -115,7 +126,7 @@ export default function UserSection({
       </Container>
       <Container label="Trophées cachés">
         <div className="trophy-container user-section__container">
-          <EasterEggs easterEggs={easterEggs} />
+          <EasterEggs trophies={easterEggs} onLionClick={onLionClick} />
         </div>
       </Container>
     </div>

@@ -134,6 +134,7 @@ export default function Dashboard() {
             user={user}
             onProfilePictureChange={updateProfilePictureIndex}
             onCharlieClick={() => displayEasterEgg(TrophyEnum.Charlie)}
+            onLionClick={() => displayEasterEgg(TrophyEnum.Lion)}
           />
         </div>
         {theme && (
