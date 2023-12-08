@@ -1,0 +1,52 @@
+$primaryFontSize: 3rem;
+
+.landingPage {
+  position: absolute;
+  padding: 5rem;
+  inset: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: $primaryFontSize;
+  font-family: Georgia, 'Times New Roman', Times, serifa;
+  letter-spacing: 2px;
+  background-color: var(--color-grey);
+  color: #f1f1f1;
+  line-height: 4rem;
+
+  .span {
+    display: block;
+    font-size: $primaryFontSize;
+    margin-bottom: 5rem;
+  }
+
+  .fst-description {
+    font-size: $primaryFontSize;
+  }
+
+  .third-text {
+    color: var(--color-primary);
+  }
+
+  .final-text {
+    color: var(--color-primary);
+  }
+
+  .project-title {
+    display: block;
+    font-size: $primaryFontSize;
+    color: var(--color-primary);
+  }
+}
+
+.quiz {
+  display: block;
+  color: white;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  height: 100%;
+}

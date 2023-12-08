@@ -11,12 +11,14 @@ import { TrophyEnum } from '../../models/trophies/TrophyEnum';
 import EasterEgg from '../egg/EasterEgg';
 import { User } from '../../models/user/User';
 import { Modal } from 'antd';
+import LandingPage from '../landing/LandingPage';
 
 export default function Dashboard() {
   const [theme, setTheme] = useState<Theme | null>(null);
   const [trophy, setTrophy] = useState<Trophy | null>(null);
   const [user, setUser] = useState<User>(storageService.getData());
   const [modal, contextHolder] = Modal.useModal();
+  const [displayLanding, setDisplayLanding] = useState<boolean>(false);
 
   function updateProfilePictureIndex(index: number) {
     const updatedUser = {
@@ -71,9 +73,13 @@ export default function Dashboard() {
     setTrophy(easterEggs[trophy]);
   }
 
-  return (
+  function handleDisplayLanding() {
+    setDisplayLanding(true);
+  }
+
+  return !displayLanding ? (
     <div className="dashboard">
-      <Header />
+      <Header onDisplayLanding={handleDisplayLanding} />
       <div className="dashboard__content">
         <Menu onItemClick={handleMenuItemClick} />
         <UserSection
@@ -88,5 +94,7 @@ export default function Dashboard() {
       {trophy && <EasterEgg trophy={trophy} onClose={handleEasterEggClose} />}
       {contextHolder}
     </div>
+  ) : (
+    <LandingPage onClose={() => setDisplayLanding(false)} />
   );
 }
